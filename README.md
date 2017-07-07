@@ -4,7 +4,7 @@
 
 ## Description
 
-Exercise using Rails to simulate an online marketplace. Uses relational database with PostgreSQL to allow reviews of products.
+Uses Rails and Devise to practice user authentication setup on a fake commerce site. Users are authenticated through Devise and site privileges change based on whether the user is currently logged in and their current admin status.
 
 ## Prerequisites
 * Rails
