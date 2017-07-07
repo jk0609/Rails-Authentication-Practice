@@ -1,4 +1,7 @@
 class ProductsController < ApplicationController
+    before_action :except => [:show] do
+      redirect_to new_user_session_path unless current_user && current_user.admin
+    end
 
     def show
       @category = Category.find(params[:category_id])
