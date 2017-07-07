@@ -1,0 +1,29 @@
+<h1><%=@product.name%></h1>
+<img src="/300x300.jpg" alt="">
+<h3>$<%='%.2f' % @product.price%></h3>
+<h5><%=@product.description%></h5>
+<% if is_admin? %>
+<hr>
+<%= link_to "Edit Product", edit_category_product_path(@category, @product), class:'btn btn-success'%>
+<%= link_to "Delete Product", category_product_path(@category, @product), :data => {:confirm => "Warning: This will delete this product permanently.", :method => "delete"}, class:'btn btn-danger'%>
+<% end %>
+<hr>
+<h3>Reviews</h3>
+
+<% @product.reviews.each do |r| %>
+<div class='review-box'>
+  <h4><%= r.user.username %></h4>
+  <p><%= r.body %></p>
+  <% if is_admin? %>
+    <%= link_to '<span class="glyphicon glyphicon-remove"></span>'.html_safe, product_review_path(@product, r), :data => {:confirm => "Warning: This will delete this review permanently.", :method => "delete"}, class:'delete-review'%>
+  <% end %>
+</div>
+<% end %>
+
+<% if current_user %>
+  <%= form_for [@product, @review] do |form| %>
+    <h5>Review</h5>
+    <%= form.text_field :body %>
+    <%= form.submit %>
+  <% end %>
+<% end %>
